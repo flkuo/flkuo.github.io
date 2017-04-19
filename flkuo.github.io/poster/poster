@@ -1,0 +1,30 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+<link rel="stylesheet" href="../styless/styles.css">
+<link rel="stylesheet" href="../styless/pygment_trac.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Gota Morota - List of Publications by Year</title>
+</head>
+
+<body>
+<p class="menublock"><a href="../index.html">Back</a></p>
+
+
+<h1>Posters</h1>
+<hr>
+
+<div class="container">
+  <img src="poster01.jpg" alt="poster01" style="width:90px">
+  <p><span>TAM</span>Nursing Fair</p>
+  <p>TAM study.</p>
+</div>
+
+<div class="container">
+  <img src="poster02.jpg" alt="poster02" style="width:90px">
+  <p><span >MNRS.</span> 2016.</p>
+  <p>AMbulation.</p>
+</div>
