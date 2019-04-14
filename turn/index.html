@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <div id="magazine">
+    <div id="flipbook">
         <div class="hard"> Turn.js </div> 
         <div class="hard"></div>
         <div> Page 1 </div>
@@ -23,29 +23,7 @@
           width: 2400,
           height: 1300
       });
-      $(window).ready(function() {
-        $('#magazine').turn({
-                            display: 'double', //assigning display style
-                            acceleration: true,
-                            gradients: !$.isTouch,
-                            elevation:50,
-                            when: {
-                                turned: function(e, page) {
-                                    /*console.log('Current view: ', $(this).turn('view'));*/
-                                }
-                            }
-                        });
-    });
-     
-     
-    $(window).bind('keydown', function(e){
-         
-        if (e.keyCode==37)
-            $('#magazine').turn('previous');
-        else if (e.keyCode==39)
-            $('#magazine').turn('next');
-             
-    });
+   
     </script>
   </body>
 
