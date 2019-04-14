@@ -1,5 +1,14 @@
     body{
     overflow:hidden;
+         background:#ccc;
+}
+#magazine{
+    width:1152px; //dimensions to show magazine
+    height:752px;
+}
+#magazine .turn-page{
+    background-color:#ccc;
+    background-size:100% 100%;
 }
 
 #flipbook{
