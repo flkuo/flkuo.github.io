@@ -67,27 +67,3 @@ b&&"prevented"!=t("released",this,[a.point||b])&&i.hideFoldedPage.call(this,!0);
 this.data();b.effect&&b.effect.stop();if(a){a.to.length||(a.to=[a.to]);a.from.length||(a.from=[a.from]);for(var c=[],d=a.to.length,e=!0,g=this,i=(new Date).getTime(),j=function(){if(b.effect&&e){for(var f=[],k=Math.min(a.duration,(new Date).getTime()-i),l=0;l<d;l++)f.push(b.effect.easing(1,k,a.from[l],c[l],a.duration));a.frame(1==d?f[0]:f);k==a.duration?(delete b.effect,g.data(b),a.complete&&a.complete()):window.requestAnim(j)}},l=0;l<d;l++)c.push(a.to[l]-a.from[l]);b.effect=f.extend({stop:function(){e=
 !1},easing:function(a,b,c,d,e){return d*Math.sqrt(1-(b=b/e-1)*b)+c}},a);this.data(b);j()}else delete b.effect}});f.isTouch=u;f.mouseEvents=r;f.cssPrefix=T;f.cssTransitionEnd=function(){var a,b=document.createElement("fakeelement"),c={transition:"transitionend",OTransition:"oTransitionEnd",MSTransition:"transitionend",MozTransition:"transitionend",WebkitTransition:"webkitTransitionEnd"};for(a in c)if(void 0!==b.style[a])return c[a]};f.findPos=D})(jQuery);
 
-
-$(window).ready(function() {
-        $('#magazine').turn({
-                            display: 'double', //assigning display style
-                            acceleration: true,
-                            gradients: !$.isTouch,
-                            elevation:50,
-                            when: {
-                                turned: function(e, page) {
-                                    /*console.log('Current view: ', $(this).turn('view'));*/
-                                }
-                            }
-                        });
-    });
-     
-     
-    $(window).bind('keydown', function(e){
-         
-        if (e.keyCode==37)
-            $('#magazine').turn('previous');
-        else if (e.keyCode==39)
-            $('#magazine').turn('next');
-             
-    });
