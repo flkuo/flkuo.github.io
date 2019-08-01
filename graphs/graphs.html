@@ -1,0 +1,371 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+<link rel="stylesheet" href="../styless/styles.css">
+<link rel="stylesheet" href="../styless/pygment_trac.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Graphs</title>
+<style>
+.container {
+  display: inline-block;
+  border: 0px solid #d4d4d4;
+  background-color: #eafaf1;
+  border-radius: 2px;
+  padding: 14px;
+  margin: 14px ;
+  width: 330px;
+  height: 400px; 
+  float: left;
+   
+}
+
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: center;
+  margin-bottom: 15px;
+  border-radius: 2%;
+}
+
+.container span {
+  font-size: 20px;
+  margin-right: 15px;
+}
+
+@media (max-width: 500px) {
+  .container {
+      text-align: center;
+  }
+  .container img {
+      margin: auto;
+      float: none;
+      display: block;
+  }
+}
+</style>
+</head>
+<body>
+<p class="menublock"><a href="../index.html">Back</a></p>
+
+<ul>
+<li><a href="graphs.html#red_text">Bar Charts</a></li>
+<li><a href="poster/poster.html">Box and Whisker Plots</a></li>
+<li><a href="http://github.com/flkuo">Kernel Density Plots</a></li>
+<li><a href="literature/">Literature</a></li>
+<li><a href="contact/contact.html">Contact</a></li>
+</ul>
+
+<hr>
+
+<h2>Bar Charts</h2>
+<div class="container">
+  <a href="tw_ev_2018.png"><img src="tw_ev_2018.png" alt="Tw_ev_2018" style="width:350px"></a>
+  <p><span>Stacked bar chart</span><br>1. Stacked<br>2. Reoder months</p>
+  <p>[Enterovirus infections in Taiwan, 2018. Data from Taiwan CDC]</p>
+  <a href="https://github.com/flkuo/R/blob/master/tw_ev_2018.R">In R</a><br></br>
+</div>
+<div class="container">
+  <a href="stacked_line_1.jpeg"><img src="stacked_line_1.jpeg" alt="stacked_line_1" style="width:350px"></a>
+  <p><span>Stacked bar chart with a variable line (1)</span>
+  <br>1. Stacked<br>2. Reoder months<br>3. Total case numbers as a variable line</p>
+  <a href="https://github.com/flkuo/R/blob/master/stacked_line.R">In R</a><br></br>
+</div>
+<div class="container">
+  <a href="stacked_line_2.jpeg"><img src="stacked_line_2.jpeg" alt="stacked_line_2" style="width:550px"></a>
+  <p><span>Stacked bar chart with a variable line (2)</span>
+  <br>1. Stacked<br>2. Reoder months<br>3. Total case numbers as a variable line<br>4. Customized axis text (2 y-axis + horizontal y-axis title  + red text)</p>
+  <a href="https://github.com/flkuo/R/blob/master/stacked_line.R">In R #2</a></br>
+</div>
+
+<br style="clear:both" />
+<br></br>
+
+<hr>
+<h2>Box and Whisker Plots</h2>
+
+<div class="container" style="height:430px; background-color:#fef9e7">
+  <a href="boxplot_1.jpeg"><img src="boxplot_1.jpeg" alt="boxplot_1" style="width:400px"></a>
+  <p><span>Box and Whisker plot over time </span></p>
+ 
+ <table style="width:40%">
+  <tr>
+    <th>Hr</th>
+    <th>Steps</th> 
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>9</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>5</td>
+  </tr>
+</table>
+
+  <a href="https://github.com/flkuo/R/blob/master/boxplot.R">In R #1</a><br></br>
+
+</div>
+<div class="container" style="height:430px; background-color:#fef9e7">
+  <a href="boxplot_2.jpeg"><img src="boxplot_2.jpeg" alt="boxplot_2" style="width:300px"></a>
+  <p><span>Grouped box and Whisker plot over time </span></p>
+ 
+ <table style="width:40%">
+  <tr>
+    <th>Hr</th>
+    <th>Steps</th> 
+    <th>FC_bhsteps</th>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>9</td>
+    <td>C2</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>4</td>
+    <td>C1</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>5</td>
+    <td>C2</td>
+  </tr>
+</table>
+
+  <a href="https://github.com/flkuo/R/blob/master/boxplot.R">In R #2</a><br></br>
+  
+</div>
+
+<div class="container" style="height:430px; background-color:#fef9e7">
+  <a href="boxplot_3.jpeg"><img src="boxplot_3.jpeg" alt="boxplot_3" style="width:400px"></a>
+  <p><span>Box and Whisker plot over time: Basic</span></p>
+ 
+ <table style="width:40%">
+  <tr>
+    <th>Hr</th>
+    <th>Steps</th> 
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>9</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>5</td>
+  </tr>
+</table>
+
+  <a href="https://github.com/flkuo/R/blob/master/boxplot.R">In R #3</a><br></br>
+  </div>
+
+  
+  
+  <div class="container" style="height:430px; background-color:#fef9e7" >
+  <a href="boxplot_4.jpeg"><img src="boxplot_4.jpeg" alt="boxplot_4" style="width:400px"></a>
+  <p><span>Box and Whisker plot over time: Legend removed</span></p>
+ 
+ <table style="width:40%">
+  <tr>
+    <th>Hr</th>
+    <th>Steps</th> 
+    <th>FC_bhsteps</th>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>9</td>
+    <td>C2</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>4</td>
+    <td>C1</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>5</td>
+    <td>C2</td>
+  </tr>
+</table>
+
+  <a href="https://github.com/flkuo/R/blob/master/boxplot.R">In R #4</a><br></br>
+  </div>
+
+  
+  
+    <div class="container" style="height:430px; background-color:#fef9e7">
+  <a href="boxplot_5.jpeg"><img src="boxplot_5.jpeg" alt="boxplot_5" style="height:180px"></a>
+  <p><span>Box and Whisker plot over time: With flipped axes</span></p>
+ 
+ <table style="width:40%">
+  <tr>
+    <th>Hr</th>
+    <th>Steps</th> 
+    <th>FC_bhsteps</th>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>9</td>
+    <td>C2</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>4</td>
+    <td>C1</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>5</td>
+    <td>C2</td>
+  </tr>
+</table>
+
+  <a href="https://github.com/flkuo/R/blob/master/boxplot.R">In R #5</a><br></br>
+  </div>
+  
+  
+    <div class="container" style="height:430px; background-color:#fef9e7">
+  <a href="boxplot_6.jpeg"><img src="boxplot_6.jpeg" alt="boxplot_6" style="width:400px"></a>
+  <p><span>Box and Whisker plot over time with labels adjusted</span></p>
+ 
+ <table style="width:40%">
+  <tr>
+    <th>Hr</th>
+    <th>Steps</th> 
+    <th>FC_bhsteps</th>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>9</td>
+    <td>C2</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>4</td>
+    <td>C1</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>5</td>
+    <td>C2</td>
+  </tr>
+</table>
+
+  <a href="https://github.com/flkuo/R/blob/master/boxplot.R">In R #9</a><br></br>
+
+</div>
+  
+    <br style="clear:both" />
+<br></br>
+
+<hr>
+<h2>Kernel Density Plots</h2>
+  
+  
+  <div class="container" style="height:440px">
+  <a href="density_1.jpeg"><img src="density_1.jpeg" alt="density_1" style="width:400px"></a>
+  <p><span>Kernel density plots by group: Lattice example</span></p>
+ 
+ <table style="width:40%">
+  <tr>
+    <th>Steps</th> 
+    <th>FC_bhsteps</th>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>C2</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>C1</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>C2</td>
+  </tr>
+</table>
+
+  <a href="https://github.com/flkuo/R/blob/master/boxplot.R">In R #6</a><br></br>
+  </div>
+  
+  
+  <div class="container" style="height:440px">
+  <a href="density_2.jpeg"><img src="density_2.jpeg" alt="density_2" style="height:180px"></a>
+  <p><span>Kernel density plots by group</span></p>
+ 
+ <table style="width:40%">
+  <tr>
+    <th>Steps</th> 
+    <th>FC_bhsteps</th>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>C2</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>C1</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>C2</td>
+  </tr>
+</table>
+
+  <a href="https://github.com/flkuo/R/blob/master/boxplot.R">In R #7</a><br></br>
+  </div>
+  
+  
+    <div class="container" style="height:440px">
+  <a href="density_3.jpeg"><img src="density_3.jpeg" alt="density_3" style="height:180px"></a>
+  <p><span>Kernel density plots by group: Lattice example</span></p>
+ 
+ <table style="width:40%">
+  <tr>
+    <th>Steps</th> 
+    <th>FC_bhsteps</th>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>C2</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>C1</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>C2</td>
+  </tr>
+</table>
+
+  <a href="https://github.com/flkuo/R/blob/master/boxplot.R">In R #8</a><br></br>
+  </div>
+  
+  
+
+  
+  
+  <br style="clear:both" />
+<br></br>
+
+<hr>
+<h2>New</h2>
+
+</body>
+</html>
