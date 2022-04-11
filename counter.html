@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- CSS code-->
+  
+        <style>
+            /** basic styling for the demo **/
+
+.item {
+  display: inline-block;
+  margin: 15px 0;
+  padding: 8px;
+  border: 2px solid teal;
+  user-select: none;
+}
+
+.item .count {
+  display: inline-block;
+  background-color: #181818;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 4px;
+}
+        </style>
+    </head>
+  
+    <body>
+      <div class="item">高齡者 = <span class="count">0</span></div>
+      <div class="item" style="float:right;">較年輕者 = <span class="count" >0</span></div>
+
+        <script>
+         /** selecting the elements with ".item" class and declaring an array to store each element counter separately **/
+const items = document.querySelectorAll('.item'),
+      countArr = new Array(items.length);
+
+/** loop through the elements and add "mouseup" listener (to ensure catching both left and right clicks) for each element  **/
+ 
+/** 
+* el: the current element from the ".item" elements collection
+* i: the index of that elemnt in the collection
+**/
+
+items.forEach((el, i) => {
+  countArr[i] = 0; /** initialize each array element with 0 so we can count later (new Array puts "undefined" as the array elements values) **/
+  
+  /** add the "mouseup" listener **/
+  el.addEventListener('mouseup', e => {
+    let txtCount = el.querySelector('.count'); /** selecting the "span" that contains the counter from the current elemnt (don't forget that we're looping in ".item" elements collection) **/
+    if(e.which === 1) countArr[i]++; /** left click **/
+    else if(e.which === 3) countArr[i]--; /** right click **/
+    txtCount.textContent = countArr[i]; /** update the "span" wih the calculated counter as left click adds 1 and right click removes 1 from the counter of each element **/
+  });
+});
+        </script>
+    </body>
+</html>
