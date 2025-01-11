@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡易考題生成器</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .question { margin-bottom: 20px; }
+        button { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>簡易考題生成器</h1>
+    <div>
+        <label for="category">選擇類別：</label>
+        <select id="category">
+            <option value="ethics">職業倫理</option>
+            <option value="care">身體照顧</option>
+        </select>
+    </div>
+    <div>
+        <label for="questionCount">題目數量：</label>
+        <input type="number" id="questionCount" min="1" max="10" value="3">
+    </div>
+    <button id="generateBtn">生成題目</button>
+
+    <div id="questionsContainer"></div>
+
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            const category = document.getElementById('category').value;
+            const questionCount = document.getElementById('questionCount').value;
+
+            const response = await fetch('https://f8erbkz64d.execute-api.ap-southeast-2.amazonaws.com/default/quiz-api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ category, count: parseInt(questionCount) })
+            });
+
+            const data = await response.json();
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = '';
+
+            data.questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                
+                const questionText = document.createElement('p');
+                questionText.textContent = `${index + 1}. ${question.text}`;
+                questionDiv.appendChild(questionText);
+
+                question.options.forEach((option, i) => {
+                    const label = document.createElement('label');
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `question-${index}`;
+                    radio.value = i;
+
+                    label.appendChild(radio);
+                    label.appendChild(document.createTextNode(option));
+                    questionDiv.appendChild(label);
+                    questionDiv.appendChild(document.createElement('br'));
+                });
+
+                container.appendChild(questionDiv);
+            });
+
+            const submitBtn = document.createElement('button');
+            submitBtn.textContent = '提交答案';
+            submitBtn.addEventListener('click', checkAnswers);
+            container.appendChild(submitBtn);
+        });
+
+        async function checkAnswers() {
+            const questions = document.querySelectorAll('.question');
+            const answers = [];
+
+            questions.forEach((question, index) => {
+                const selected = question.querySelector(`input[name="question-${index}"]:checked`);
+                answers.push(selected ? parseInt(selected.value) : null);
+            });
+
+            const response = await fetch('https://f8erbkz64d.execute-api.ap-southeast-2.amazonaws.com/default/quiz-api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ answers })
+            });
+
+            const result = await response.json();
+            alert(`您答對了 ${result.correctCount} 題，共 ${result.total} 題！`);
+        }
+    </script>
+</body>
+</html>
