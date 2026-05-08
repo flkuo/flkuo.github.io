@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高齡助行科技推廣平台 | 國衛院</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Outfit:wght@500;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #0f172a; --accent: #3730a3; }
+        body { font-family: 'Outfit', 'Noto Sans TC', sans-serif; background: #ffffff; color: var(--primary); margin: 0; }
+        
+        @media (min-width: 1024px) {
+            .sidebar { width: 28%; height: 100vh; position: sticky; top: 0; border-right: 1px solid #e2e8f0; z-index: 50; background: #ffffff; }
+            .content-area { flex: 1; min-height: 100vh; display: flex; flex-direction: column; }
+            .scroll-container { flex: 1; overflow-y: auto; }
+        }
+
+        .nav-link { position: relative; color: #94a3b8; cursor: pointer; transition: 0.3s; padding: 0.5rem 0; }
+        .nav-active { color: var(--primary) !important; font-weight: 800; }
+        .nav-active::before { 
+            content: ''; position: absolute; left: -24px; top: 50%; width: 4px; height: 24px; 
+            background: var(--accent); border-radius: 2px; transform: translateY(-50%); 
+        }
+
+        .partner-group-container { background: #f8fafc; border-radius: 24px; padding: 24px; border: 1px solid #e2e8f0; }
+        .sub-page-bg { background-color: #f8fafc; }
+        .product-page-bg { background-color: #f0f4f2; }
+
+        .step-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid #eef2f6;
+            text-align: left;
+            transition: 0.3s;
+        }
+        .step-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        .step-num { font-size: 40px; font-weight: 800; color: #e2e8f0; line-height: 1; margin-bottom: 15px; }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="flex flex-col lg:flex-row">
+
+    <aside class="sidebar flex flex-col p-12">
+        <header class="mb-12 cursor-pointer" onclick="showStartPage()">
+            <div class="w-12 h-1 bg-indigo-800 mb-8"></div>
+            <p class="text-[10px] font-bold text-slate-400 mb-1 uppercase tracking-widest">NHRI Platform</p>
+            <h1 class="text-3xl font-black text-slate-900 tracking-tighter leading-tight">高齡助行科技<br>整合推廣平台</h1>
+        </header>
+
+        <nav id="categoryNav" class="space-y-6 flex-1 mb-10"></nav>
+
+        <div class="partner-group-container">
+            <h4 class="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-6">服務諮詢與體驗</h4>
+            <div class="space-y-5">
+                
+                <a href="https://www.athome-tw.com/" target="_blank" class="flex items-center space-x-4 cursor-pointer group">
+                    <div class="w-10 h-10 bg-white rounded-xl border border-slate-200 flex items-center justify-center font-bold text-slate-400 text-[9px] shadow-sm group-hover:border-indigo-200 transition uppercase tracking-tighter">Athome</div>
+                    <div>
+                        <div class="text-sm font-bold text-slate-800 group-hover:text-indigo-700 transition">輔具家 ATHOME ↗</div>
+                        <div class="text-[10px] text-indigo-600 font-bold tracking-tight">預約實機體驗</div>
+                    </div>
+                </a>
+
+                <div class="flex items-center space-x-4 cursor-pointer group" onclick="openModal('north')">
+                    <div class="w-10 h-10 bg-white rounded-xl border border-slate-200 flex items-center justify-center font-bold text-slate-400 text-xs shadow-sm group-hover:border-indigo-200 transition">北部</div>
+                    <div>
+                        <div class="text-sm font-bold text-slate-800 group-hover:text-indigo-700 transition">新北輔具中心 ↗</div>
+                        <div class="text-[10px] text-indigo-600 font-bold tracking-tight">專業評估諮詢</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4 cursor-pointer group" onclick="openModal('south')">
+                    <div class="w-10 h-10 bg-white rounded-xl border border-slate-200 flex items-center justify-center font-bold text-slate-400 text-xs shadow-sm group-hover:border-indigo-200 transition">中南</div>
+                    <div>
+                        <div class="text-sm font-bold text-slate-800 group-hover:text-indigo-700 transition">雲林輔具中心 ↗</div>
+                        <div class="text-[10px] text-indigo-600 font-bold tracking-tight">在地展示服務</div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-200">
+                    <button onclick="showPartnerPage()" class="w-full flex justify-between items-center group">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">合作夥伴資訊</span>
+                        <span class="text-[10px] text-slate-300 group-hover:text-indigo-600 transition">More ➔</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="content-area">
+        <div class="scroll-container">
+            <section id="startPage" class="sub-page-bg h-full flex flex-col justify-center items-center px-8 fade-in">
+                <div class="max-w-5xl text-center">
+                    <span class="inline-block px-3 py-1 bg-white text-slate-400 rounded text-[10px] font-black tracking-widest uppercase mb-6 shadow-sm">Professional Research</span>
+                    <h2 class="text-7xl font-black text-slate-900 mb-8 tracking-tighter leading-tight">精密適配。<br>安全無礙的晚年生活。</h2>
+                    <p class="text-lg text-slate-400 mb-20 max-w-2xl mx-auto leading-relaxed">我們整合國內外頂尖科技，透過輔助中心專業評估，為每一位長者建立全方位的行動安全網。</p>
+
+                    <div class="grid grid-cols-3 gap-8">
+                        <div class="step-card">
+                            <div class="step-num">01</div>
+                            <h4 class="text-xl font-bold text-slate-900 mb-2">科技預覽</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed">瀏覽最新研發之智慧助行與安全監測系統。</p>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">02</div>
+                            <h4 class="text-xl font-bold text-slate-900 mb-2">專業諮詢</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed">由專業治療師提供線下實體中心適配評估。</p>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">03</div>
+                            <h4 class="text-xl font-bold text-slate-900 mb-2">適配媒合</h4>
+                            <p class="text-sm text-slate-400 leading-relaxed">根據環境與生理需求，媒合最適切之器材。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="productPage" class="hidden min-h-full product-page-bg flex flex-col">
+                <header id="productHeader" class="px-24 py-16 bg-white/80 backdrop-blur-md border-b sticky top-0 z-10 text-left"></header>
+                <div id="productGrid" class="px-24 pb-24 flex-1"></div>
+            </section>
+
+            <section id="partnerPage" class="hidden min-h-full px-24 py-20 bg-white">
+                <h4 class="text-5xl font-black text-slate-900 mb-6 tracking-tighter text-left">合作夥伴與資源</h4>
+                <p class="text-sm text-slate-400 mb-16 text-left">平台合作廠商與學研單位一覽</p>
+
+                <div class="grid grid-cols-2 gap-x-16 gap-y-0 text-left mb-16">
+                    <div>
+                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-6">I — 居家安全防護</p>
+                        <a href="https://www.vistatec.com.tw/indexdbe5.html?lang=cht" target="_blank" class="border-b border-slate-100 pb-4 mb-4 block group"><p class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition">磊星科技 ↗</p><p class="text-xs text-slate-400">mmWave 智慧照護感測</p></a>
+                        <a href="https://safemetag.com/" target="_blank" class="border-b border-slate-100 pb-4 mb-4 block group"><p class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition">華碼科技 ↗</p><p class="text-xs text-slate-400">智慧平安福 Safeme Tag</p></a>
+                        <a href="https://play.google.com/store/apps/details?id=com.mytracmo.g3.seniorcare&hl=zh_TW" target="_blank" class="border-b border-slate-100 pb-4 mb-8 block group"><p class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition">Careactive ↗</p><p class="text-xs text-slate-400">照護管理 APP</p></a>
+
+                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-6">III — 智慧提醒感測</p>
+                        <a href="https://humetrics.ai/" target="_blank" class="border-b border-slate-100 pb-4 mb-4 block group"><p class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition">維思感創 ↗</p><p class="text-xs text-slate-400">iCue 智慧床墊</p></a>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-6">II — 行動助行科技</p>
+                        <a href="https://www.freebionics.com.tw/" target="_blank" class="border-b border-slate-100 pb-4 mb-4 block group"><p class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition">福寶科技 ↗</p><p class="text-xs text-slate-400">Free Walk 外骨骼機器人</p></a>
+                        <a href="https://www.just4u.tw/" target="_blank" class="border-b border-slate-100 pb-4 mb-4 block group"><p class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition">強生醫療 ↗</p><p class="text-xs text-slate-400">行動助行輔具</p></a>
+                        <a href="https://www.karma.com.tw/" target="_blank" class="border-b border-slate-100 pb-4 mb-4 block group"><p class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition">Karma 康揚 ↗</p><p class="text-xs text-slate-400">輪椅與行動輔具</p></a>
+                        <a href="https://orange-plus.com/" target="_blank" class="border-b border-slate-100 pb-4 mb-4 block group"><p class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition">悅康品家 ↗</p><p class="text-xs text-slate-400">樂活行動輔具</p></a>
+
+                        <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-6 mt-8">II + III — 跨領域整合</p>
+                        <a href="https://www.yofa-tech.com/" target="_blank" class="border-b border-slate-100 pb-4 mb-4 block group"><p class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition">名一生物 ↗</p><p class="text-xs text-slate-400">智能分離式移位床</p></a>
+                        <a href="https://zh.wistronmedtech.com/" target="_blank" class="border-b border-slate-100 pb-4 mb-4 block group"><p class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition">緯創醫學 ↗</p><p class="text-xs text-slate-400">AIoT 智慧照護</p></a>
+                        <a href="https://fullcare-tech.tw/" target="_blank" class="border-b border-slate-100 pb-4 mb-4 block group"><p class="text-lg font-bold text-slate-800 group-hover:text-indigo-700 transition">Full-Care 全能照護科技 ↗</p><p class="text-xs text-slate-400">全方位照護方案</p></a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-12 text-left">
+                    <div>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">學研合作單位</p>
+                        <div class="space-y-6">
+                            <div class="border-b border-slate-100 pb-4"><p class="text-lg font-bold text-slate-800">國立臺灣大學</p><p class="text-xs text-slate-400">醫學工程學系 — 智慧輔具研發</p></div>
+                            <div class="border-b border-slate-100 pb-4"><p class="text-lg font-bold text-slate-800">工業技術研究院</p><p class="text-xs text-slate-400">生醫與醫材研究所 — 技術轉型</p></div>
+                            <div class="border-b border-slate-100 pb-4"><p class="text-lg font-bold text-slate-800">臺北醫學大學</p><p class="text-xs text-slate-400">復健醫學部 — 臨床試驗</p></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 rounded-[2rem] p-10 border border-slate-100 self-start">
+                        <p class="text-slate-500 text-sm mb-6 leading-relaxed">詳細高齡產品資訊與市場現況：</p>
+                        <a href="https://www.smartagedcare.org/" target="_blank" class="block bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition group">
+                            <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-2">Official Site</p>
+                            <span class="text-xl font-bold text-slate-800 group-hover:text-indigo-700">2024 高齡產品資訊網 ↗</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="bg-white border-t border-slate-100 py-6 px-24">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="text-[10px] font-black text-slate-900 leading-tight uppercase tracking-tighter">National Health<br>Research Institutes</div>
+                    <div class="h-6 w-px bg-slate-200"></div>
+                    <div class="text-xs font-bold text-slate-800">國家衛生研究院</div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <div id="visitorCounter" class="flex items-center space-x-2 text-[10px] text-slate-400">
+                        <span>瀏覽次數</span>
+                        <span id="visitCount" class="font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">—</span>
+                    </div>
+                    <div class="text-[10px] font-medium text-slate-400 tracking-wide uppercase">
+                        © 2026 Center for Geriatrics and Gerontology Research. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <div id="infoModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[200] hidden items-center justify-center p-4">
+        <div class="bg-white w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl flex text-left">
+            <div class="p-16 flex-1">
+                <h3 id="modalName" class="text-3xl font-black mb-8 text-slate-900"></h3>
+                <div class="space-y-4 text-slate-500 mb-10">
+                    <p id="modalAddr"></p>
+                    <p id="modalPhone"></p>
+                </div>
+                <div class="flex space-x-4">
+                    <a id="modalWebsite" href="#" target="_blank" class="px-12 py-4 bg-indigo-800 text-white rounded-xl font-bold hover:bg-indigo-700 transition inline-block">前往官網 ↗</a>
+                    <button onclick="closeModal()" class="px-12 py-4 bg-slate-900 text-white rounded-xl font-bold">關閉視窗</button>
+                </div>
+            </div>
+            <div class="w-1/3 bg-slate-50 border-l flex items-center justify-center text-slate-300 font-bold uppercase tracking-widest">Map Preview</div>
+        </div>
+    </div>
+
+    <script>
+        const categories = [
+            { id: 'env', title: '居家安全防護', prefix: 'ENVIRONMENT SAFETY', products: [
+                { name: '智慧照護感測系統', vendor: '磊星科技', tag: '床邊・浴廁・臥床', desc: '床邊照護、浴廁安全、臥床活動監測三大場景。採用 mmWave 毫米波感測器，提供久坐偵測、起身預警、跌倒偵測，搭配異常提示與即時通知。', image: '廠商產品與DM/磊星科技_智慧照護新科技.jpg', video: '', website: 'https://www.vistatec.com.tw/indexdbe5.html?lang=cht', productUrl: '' },
+                { name: '智慧平安福 Safeme Tag', vendor: '華碼科技', tag: 'AI 隨身助理', desc: '最輕巧的 AI 手機，具備跌倒預防警示、遠端設定、AI Voice 語音功能。協助獨居與失智長者獨立自主生活，減輕照護人力與家庭負擔。', image: '廠商產品與DM/華碼科技_智慧平安福2.jpg', video: '', website: 'https://safemetag.com/', productUrl: '' },
+                { name: 'Care Active 照護 APP', vendor: 'Careactive', tag: '行動應用', desc: '銀髮族照護管理行動應用程式，提供健康追蹤與照護提醒功能。', image: '', video: '', website: 'https://play.google.com/store/apps/details?id=com.mytracmo.g3.seniorcare&hl=zh_TW', productUrl: 'https://apps.apple.com/tw/app/care-active/id1591088198' }
+            ]},
+            { id: 'mobility', title: '行動助行科技', prefix: 'MOBILITY TECH', products: [
+                { name: 'Free Walk 外骨骼機器人', vendor: '福寶科技', tag: '外骨骼輔助', desc: '穿戴式外骨骼行走輔助機器人，幫助下肢行動不便者重新站立與行走。另有 Hip-Bo 髖關節復能機器人。', image: '', video: '', website: 'https://www.freebionics.com.tw/', productUrl: 'https://www.freebionics.com.tw/tw/freewalk' },
+                { name: '行動助行輔具', vendor: '強生醫療', tag: '醫療輔具', desc: '專業醫療級行動助行輔具，提供多樣化的助行器與輪椅產品。', image: '', video: '', website: 'https://www.just4u.tw/', productUrl: '' },
+                { name: '輪椅與行動輔具', vendor: 'Karma 康揚', tag: '輪椅專家', desc: '國際知名輪椅品牌，提供多元化輪椅與行動輔具解決方案。', image: '', video: '', website: 'https://www.karma.com.tw/', productUrl: '' },
+                { name: '樂活行動輔具', vendor: '悅康品家', tag: '生活輔具', desc: '以提升高齡者生活品質為目標，提供舒適安全的行動輔助產品。', image: '', video: '', website: 'https://orange-plus.com/', productUrl: '' },
+                { name: '智能分離式移位床', vendor: '名一生物', tag: '零接觸照護', desc: '零接觸零抬舉，結合緯創毫米波感測與 AI 零接觸生理監測，可記錄心跳、呼吸、離床狀態，並透過 LINE 群組即時推播異常警示。', image: '廠商產品與DM/智能分離式移位床+照護系統DM_12192024_F.jpg', video: '', website: 'https://www.yofa-tech.com/', productUrl: '' },
+                { name: '智慧照護解決方案', vendor: '緯創醫學', tag: '醫療科技', desc: '結合 AIoT 技術，提供智慧醫療與遠距照護整合解決方案。', image: '', video: '', website: 'https://zh.wistronmedtech.com/', productUrl: '' },
+                { name: '全能照護系統', vendor: 'Full-Care 全能照護科技', tag: '整合照護', desc: '整合行動輔助與智慧感測技術，提供全方位高齡照護科技方案。', image: '', video: '', website: 'https://fullcare-tech.tw/', productUrl: '' }
+            ]},
+            { id: 'sensing', title: '智慧提醒感測', prefix: 'SMART SENSING', products: [
+                { name: 'iCue 智慧床墊', vendor: '維思感創', tag: '智慧感測', desc: '智慧床墊感測系統，即時監測睡眠狀態與生理數據，提供健康趨勢分析與異常提醒。', image: '', video: '', website: 'https://humetrics.ai/', productUrl: '' },
+                { name: '智能分離式移位床', vendor: '名一生物', tag: '零接觸監測', desc: '結合毫米波感測的 AI 零接觸生理監測系統，記錄心跳、呼吸、離床狀態，支援個人化預警與 LINE 即時推播。', image: '廠商產品與DM/智能分離式移位床+照護系統DM_12192024_F.jpg', video: '', website: 'https://www.yofa-tech.com/', productUrl: '' },
+                { name: '智慧照護解決方案', vendor: '緯創醫學', tag: '遠距照護', desc: '運用 AIoT 與毫米波感測技術，提供遠距生理監測與智慧提醒服務。', image: '', video: '', website: 'https://zh.wistronmedtech.com/', productUrl: '' },
+                { name: '全能照護感測系統', vendor: 'Full-Care 全能照護科技', tag: '智慧感測', desc: '整合多元感測技術，提供居家環境智慧提醒與安全監測功能。', image: '', video: '', website: 'https://fullcare-tech.tw/', productUrl: '' }
+            ]}
+        ];
+
+        const centerData = {
+            north: { name: "新北市輔具資源中心", addr: "247 新北市蘆洲區集賢路 245號 9樓", phone: "TEL: (02) 8286-7045", website: "https://atrc.aihsin.ntpc.gov.tw/" },
+            south: { name: "雲林縣輔助器具資源中心", addr: "640 雲林縣斗六市府文路 22號 1樓（身心障礙福利服務大樓）", phone: "TEL: (05) 533-9620", website: "https://ylad.yunlin.gov.tw/" }
+        };
+
+        function init() {
+            const nav = document.getElementById('categoryNav');
+            nav.innerHTML = categories.map(cat => `
+                <div class="nav-link text-xl font-medium" onclick="renderProducts('${cat.id}')">${cat.title}</div>
+            `).join('');
+        }
+
+        function showStartPage() {
+            hideAll();
+            document.getElementById('startPage').classList.remove('hidden');
+        }
+
+        function showPartnerPage() {
+            hideAll();
+            document.getElementById('partnerPage').classList.remove('hidden');
+        }
+
+        function hideAll() {
+            ['startPage', 'productPage', 'partnerPage'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('nav-active'));
+        }
+
+        function renderProducts(catId) {
+            const cat = categories.find(c => c.id === catId);
+            hideAll();
+            document.getElementById('productPage').classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-link').forEach(el => {
+                if (el.innerText === cat.title) el.classList.add('nav-active');
+            });
+
+            document.getElementById('productHeader').innerHTML = `
+                <p class="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-2">${cat.prefix}</p>
+                <h4 class="text-5xl font-black text-slate-900 tracking-tighter">${cat.title}</h4>
+            `;
+
+            const grid = document.getElementById('productGrid');
+            if (cat.products.length > 0) {
+                grid.innerHTML = cat.products.map(p => `
+                    <div class="flex items-start py-16 border-b border-slate-200/50 fade-in text-left">
+                        <div class="w-[400px] aspect-video bg-white rounded-2xl border border-slate-200 flex items-center justify-center overflow-hidden flex-shrink-0">
+                            ${p.image ? `<img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">`
+                            : p.video ? `<iframe width="100%" height="100%" src="${p.video}" frameborder="0" allowfullscreen></iframe>`
+                            : `<div class="flex flex-col items-center"><div class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center mb-2 text-lg font-black text-slate-300">${p.vendor[0]}</div><span class="text-slate-300 font-bold text-[10px] uppercase tracking-widest">${p.vendor}</span></div>`}
+                        </div>
+                        <div class="lg:ml-16 flex-1">
+                            <p class="text-[11px] font-bold text-indigo-600 tracking-wide uppercase mb-2">${p.vendor}</p>
+                            <div class="flex items-center space-x-3 mb-4">
+                                <h5 class="text-3xl font-black text-slate-900">${p.name}</h5>
+                                <span class="px-2 py-0.5 bg-slate-100 text-slate-500 text-[9px] rounded font-bold">${p.tag}</span>
+                            </div>
+                            <p class="text-lg text-slate-400 mb-10 leading-relaxed">${p.desc}</p>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="${p.website}" target="_blank" class="px-8 py-2 bg-slate-900 text-white text-xs font-bold rounded-xl shadow-lg hover:bg-indigo-800 transition inline-flex items-center">前往官網 ↗</a>
+                                ${p.productUrl ? `<a href="${p.productUrl}" target="_blank" class="px-8 py-2 border border-indigo-200 text-indigo-600 text-xs font-bold rounded-xl hover:bg-indigo-50 transition inline-flex items-center">產品詳情 ↗</a>` : ''}
+                                <button class="px-8 py-2 border border-slate-200 text-slate-400 text-xs font-bold rounded-xl hover:bg-slate-50 transition">預約諮詢</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                grid.innerHTML = '<div class="py-20 text-center text-slate-300 font-bold uppercase tracking-widest">Coming Soon</div>';
+            }
+        }
+
+        window.openModal = (id) => {
+            const d = centerData[id];
+            document.getElementById('modalName').innerText = d.name;
+            document.getElementById('modalAddr').innerText = d.addr;
+            document.getElementById('modalPhone').innerText = d.phone;
+            document.getElementById('modalWebsite').href = d.website;
+            document.getElementById('infoModal').classList.replace('hidden', 'flex');
+        };
+
+        window.closeModal = () => document.getElementById('infoModal').classList.replace('flex', 'hidden');
+
+        // 瀏覽次數計量（localStorage）
+        (function() {
+            const key = 'nhri_visit_count';
+            let count = parseInt(localStorage.getItem(key) || '0', 10) + 1;
+            localStorage.setItem(key, count);
+            const el = document.getElementById('visitCount');
+            if (el) el.textContent = count.toLocaleString();
+        })();
+
+        init();
+    </script>
+</body>
+</html>
