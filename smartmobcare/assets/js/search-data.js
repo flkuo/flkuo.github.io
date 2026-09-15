@@ -2,7 +2,7 @@
 // search.js prefixes these with window.SITE_ROOT at runtime.
 window.SEARCH_INDEX = [
   {title:"手冊首頁", url:"index.html", kw:"手冊首頁 總覽 智慧助行防跌科技 首頁"},
-  {title:"應用類別總覽", url:"index.html#categories", kw:"應用類別 分類 總覽 環境感測 穿戴式 坐姿訓練設備 座式踩踏 環境改造"},
+  {title:"應用類別總覽", url:"index.html#categories", kw:"應用類別 分類 總覽 環境感測 穿戴式 坐姿訓練設備 座式踩踏 智慧助行器 智慧助步車"},
   {title:"如何選擇合適的科技", url:"index.html#choose", kw:"如何選擇 選購 選擇指南 採購檢查清單 智慧手杖 助行器 髖部保護氣囊"},
   {title:"衛教資源", url:"index.html#education", kw:"衛教資源 家屬 照顧者 臨床實務版"},
   {title:"政策與給付資訊", url:"index.html#policy", kw:"政策 給付 補助 政策資訊"},
@@ -67,6 +67,15 @@ window.SEARCH_INDEX = [
   {title:"臨床衛教資源：06、衛教檢核表與工具箱", url:"clinical/guide.html#sec6", kw:"居家環境安全防跌檢核表 自評篩檢表 機構導入 責任分工表 教育訓練 資料紀錄與檢討機制"},
   {title:"臨床衛教資源：07、跌倒後緊急處理指引", url:"clinical/guide.html#sec7", kw:"跌倒後處理 自救三步驟 機構應變流程 RCA 昏厥 絆倒"},
   {title:"臨床衛教資源：08、相關資源與參考文獻", url:"clinical/guide.html#sec8", kw:"參考文獻"},
+  {title:"智慧助行器應用：01、科技概述與定位", url:"apps/smart-walker.html#sec1", kw:"智慧助行器 智慧助步車 智慧手杖 科技概述"},
+  {title:"智慧助行器應用：02、核心原理與防跌機制", url:"apps/smart-walker.html#sec2", kw:"防急衝煞車 偏移修正 告警通知 步態分析 兩腳承重比 步幅 步頻 阻力助力調整"},
+  {title:"智慧助行器應用：03、適用對象與應用場景", url:"apps/smart-walker.html#sec3", kw:"下肢肌力較弱 站立支撐 帕金森氏症 日常步行 安全行走 復健步態訓練"},
+  {title:"智慧助行器應用：04、空間與地面環境需求", url:"apps/smart-walker.html#sec4", kw:"走廊淨寬 迴轉空間 地面高低差 坡度 1:12 充電收納區 空間規劃"},
+  {title:"智慧助行器應用：05、情境對照：有利與受限環境", url:"apps/smart-walker.html#sec5", kw:"迴轉半徑 坡度平緩 狹窄衛浴 鬆軟地面 情境對照"},
+  {title:"智慧助行器應用：06、導入前動線規劃示意", url:"apps/smart-walker.html#sec6", kw:"動線規劃 主動線 迴轉暫停點 受限區域 分區示意"},
+  {title:"智慧助行器應用：07、機構實證設計參考", url:"apps/smart-walker.html#sec7", kw:"實證目的 實證假設 新導入模式 機構試辦"},
+  {title:"智慧助行器應用：08、工作人員注意事項", url:"apps/smart-walker.html#sec8", kw:"執行前確認 執行中留意 注意事項"},
+  {title:"智慧助行器應用：09、相關科技與參考資料", url:"apps/smart-walker.html#sec9", kw:"參考資料 相關科技"},
   {title:"工具庫", url:"tools/library.html", kw:"工具庫 評估量表 工具查詢"},
   {title:"社區防跌運動計畫管理工具", url:"tools/community-program.html", kw:"個案評估 分組 出席記錄 匯出Excel LINE分享"},
   {title:"居家防跌自我評估工具箱", url:"tools/self-check.html", kw:"線上填寫 自我評估 即時結果 匯出CSV STEADI TUG 計時起走 簡易平衡測試 功能性前伸測試 交替登階測試 坐到站測試 STS 30秒坐站測試 PAR-Q FRAIL 虛弱評估 居家環境安全防跌檢核表 跌倒高危險因子自評篩檢表"}

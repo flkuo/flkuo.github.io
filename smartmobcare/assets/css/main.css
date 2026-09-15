@@ -1279,6 +1279,66 @@ section { margin-bottom: 46px; }
 
 .field-guide th { background: #fff; font-weight: 700; width: 30%; }
 
+/* 應用類別 D：地面條件示意圖（單欄放大顯示，圖內文字較小，需要較大版面才易讀） */
+    .install-photo-grid.single-col { grid-template-columns: 1fr; max-width: 760px; margin-left: auto; margin-right: auto; }
+
+.install-photo-grid.single-col .install-photo figcaption { font-size: 14px; text-align: center; }
+
+/* 應用類別 D：情境對照卡片（智慧助行器應用） */
+    .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 14px 0 10px; }
+
+.scenario-card { background: #fff; border: 1px solid var(--line-soft); overflow: hidden; }
+
+.scenario-card .sc-img-wrap { width: 100%; aspect-ratio: 1 / 1; background: var(--paper-deep); overflow: hidden; border-bottom: 1px solid var(--line); }
+
+.scenario-card img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.scenario-card .sc-body { padding: 16px 18px; }
+
+.scenario-card .sc-tag {
+        display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .03em;
+        padding: 3px 10px; border-radius: 2px; margin-bottom: 9px; color: #fff;
+    }
+
+.scenario-card.good .sc-tag { background: var(--indigo); }
+
+.scenario-card.caution .sc-tag { background: var(--seal); }
+
+.scenario-card h4 { font-size: 15.5px; margin-bottom: 8px; }
+
+.scenario-card p { font-size: 14px; color: var(--ink-soft); margin: 0; line-height: 1.7; }
+
+@media (max-width: 900px) {
+        .scenario-grid { grid-template-columns: 1fr; }
+    }
+
+/* 應用類別 D：動線分區圖例 */
+    .zone-legend { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 14px 0 10px; }
+
+.zone-item { background: #fff; border: 1px solid var(--line-soft); border-top: 4px solid var(--line); padding: 14px 16px; }
+
+.zone-item.zone-green { border-top-color: #2f6f4f; }
+
+.zone-item.zone-yellow { border-top-color: #a1832a; }
+
+.zone-item.zone-red { border-top-color: var(--seal); }
+
+.zone-item h4 { font-size: 13.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 7px; }
+
+.zone-item .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; flex: 0 0 auto; }
+
+.zone-item.zone-green .dot { background: #2f6f4f; }
+
+.zone-item.zone-yellow .dot { background: #a1832a; }
+
+.zone-item.zone-red .dot { background: var(--seal); }
+
+.zone-item p { font-size: 12.8px; color: var(--ink-soft); margin: 0; }
+
+@media (max-width: 680px) {
+        .scenario-grid, .zone-legend { grid-template-columns: 1fr; }
+    }
+
 @media (max-width: 680px) {
         .video-grid { grid-template-columns: 1fr; }
     }
