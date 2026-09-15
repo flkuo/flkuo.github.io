@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>居家防跌自我評估工具箱 — 智慧助行防跌科技之照護應用手冊</title>
+<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+<header class="page-head">
+    <div class="wrap">
+        <div class="breadcrumb">
+            <a href="../index.html">手冊首頁</a> ／
+            <a href="library.html">工具庫</a> ／
+            居家防跌自我評估工具箱
+        </div>
+        <h1>居家防跌自我評估工具箱</h1>
+        <p class="subtitle">請直接在下方填寫各項測試數值或問題，頁面會立即顯示結果。每筆結果可加入頁面下方的「評估紀錄」，並可一次匯出成 CSV／Excel 檔案。</p>
+    </div>
+</header>
+
+<main>
+    <p class="attribution">本頁工具為工具庫中已收錄之評估量表與檢核表之線上填寫版本，僅收錄簡易且無國際版權疑慮之項目，逐題邏輯與原始判讀標準均維持一致，詳細出處請見各工具下方標示。<strong>本頁結果僅供居家自我篩檢參考，不能取代專業醫療診斷；如結果顯示風險提高，請洽醫師或物理治療師做進一步評估。</strong>資料儲存於您目前使用的瀏覽器中（離開或清除瀏覽資料將無法保留），建議善用「匯出 CSV」備份。</p>
+
+    <div class="card" id="steadi">
+        <h2>🏠 1. STEADI 三個關鍵問題</h2>
+        <p class="card-desc">供長者與家屬在家中快速自評跌倒風險，不需器材，一分鐘內可完成。</p>
+        <div class="table-scroll">
+            <table>
+                <thead><tr><th>問題</th><th>是</th><th>否</th></tr></thead>
+                <tbody>
+                    <tr><td>站立或走路時是否感覺不穩？</td><td><input type="radio" name="steadi1" value="是"></td><td><input type="radio" name="steadi1" value="否"></td></tr>
+                    <tr><td>是否擔心自己會跌倒？</td><td><input type="radio" name="steadi2" value="是"></td><td><input type="radio" name="steadi2" value="否"></td></tr>
+                    <tr><td>過去一年內是否曾經跌倒？</td><td><input type="radio" name="steadi3" value="是"></td><td><input type="radio" name="steadi3" value="否"></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn" type="button" onclick="computeSteadi()">送出並查看結果</button>
+        <div class="output-box" id="steadiResult"></div>
+        <p class="card-desc">資料來源：美國疾病管制與預防中心（CDC）STEADI 跌倒預防計畫；《智慧助行防跌科技應用手冊》（2026 年版）第三章。</p>
+    </div>
+
+    <div class="card" id="tug">
+        <h2>⏱️ 2. TUG 測試（Timed Up and Go）</h2>
+        <p class="card-desc">記錄從扶手椅站起、步行 3 公尺、轉身返回坐下所需的秒數。</p>
+        <label>完成時間（秒） <input id="tugSecInput" type="number" min="0" step="0.1" placeholder="例如 13.5"></label>
+        <label>年齡層（選填，僅作對照參考）：
+            <select id="tugAgeBand">
+                <option value="">未選擇</option>
+                <option value="60-69">60–69 歲</option>
+                <option value="70-79">70–79 歲</option>
+                <option value="80-89">80–89 歲</option>
+            </select>
+        </label>
+        <button class="btn" type="button" onclick="computeTUG()">送出並查看結果</button>
+        <div class="output-box" id="tugResult"></div>
+        <p class="card-desc">居家判讀切點：12 秒以上建議洽詢專業人員；臨床專業篩檢切點為 15 秒以上。資料來源：Physiopedia《Timed Up and Go Test (TUG)》；CDC STEADI Algorithm；衛生福利部，2018。</p>
+    </div>
+
+    <div class="card" id="balance">
+        <h2>🧍 3. 簡易平衡測試（Simple Balance Test）</h2>
+        <p class="card-desc">安全環境下，檢測是否能單腳穩定站立。旁邊應有人員或穩固扶手可隨時協助。</p>
+        <label>單腳站立秒數 <input id="balanceSecInput" type="number" min="0" step="0.1" placeholder="例如 4"></label>
+        <button class="btn" type="button" onclick="computeBalance()">送出並查看結果</button>
+        <div class="output-box" id="balanceResult"></div>
+        <p class="card-desc">高風險篩檢標準：無法穩定單腳站立達 5 秒鐘以上。資料來源：臺北榮總，2025。</p>
+    </div>
+
+    <div class="card" id="reach">
+        <h2>🙋 4. 功能性前伸測試（Functional Reach）</h2>
+        <p class="card-desc">身體直立、雙手平舉 90 度，在固定支持面下盡量向前傾，量測手指移動的最大水平距離。</p>
+        <label>前伸距離（公分） <input id="reachInput" type="number" min="0" step="0.5" placeholder="例如 12"></label>
+        <button class="btn" type="button" onclick="computeReach()">送出並查看結果</button>
+        <div class="output-box" id="reachResult"></div>
+        <p class="card-desc">高風險篩檢標準：前伸距離 &lt;15 公分（≤10 英吋）預測有高度跌倒復發風險。資料來源：高雄榮總家醫部，2020；衛生福利部，2018。</p>
+    </div>
+
+    <div class="card" id="step">
+        <h2>🪜 5. 交替登階測試（Alternate Step Test）</h2>
+        <p class="card-desc">在安全的前提下，以「越快越好」的方式左右腳交替登上約 19 公分高、40 公分深的台階，記錄完成 8 階的時間。</p>
+        <label>完成 8 階時間（秒） <input id="stepSecInput" type="number" min="0" step="0.1" placeholder="例如 9"></label>
+        <button class="btn" type="button" onclick="computeStep()">送出並查看結果</button>
+        <div class="output-box" id="stepResult"></div>
+        <p class="card-desc">高風險篩檢標準：完成時間 &gt;10 秒，預測有跌倒風險。資料來源：衛生福利部，2018。</p>
+    </div>
+
+    <div class="card" id="sts">
+        <h2>🪑 6. 五次坐到站測試（Sit-to-Stand Test, STS）</h2>
+        <p class="card-desc">記錄連續五次從椅子上完全站起並重新坐下所需的時間。</p>
+        <label>完成五次時間（秒） <input id="stsSecInput" type="number" min="0" step="0.1" placeholder="例如 11"></label>
+        <button class="btn" type="button" onclick="computeSTS()">送出並查看結果</button>
+        <div class="output-box" id="stsResult"></div>
+        <p class="card-desc">高風險篩檢標準：完成時間 ≥12 秒，預測下肢無力與跌倒風險。資料來源：衛生福利部，2018。</p>
+    </div>
+
+    <div class="card" id="sts30">
+        <h2>⏳ 7. 30 秒坐站測試</h2>
+        <p class="card-desc">使用沒有扶手、靠牆放置的椅子，坐在椅子中間、雙手交叉放在胸前，於 30 秒內盡量重複站起、坐下，計算完成次數。</p>
+        <label>30 秒內完成次數 <input id="sts30Input" type="number" min="0" step="1" placeholder="例如 8"></label>
+        <button class="btn" type="button" onclick="computeSTS30()">送出並查看結果</button>
+        <div class="output-box" id="sts30Result"></div>
+        <p class="card-desc">本測試次數之年齡與性別對照標準，請另洽醫師或物理治療師。資料來源：《智慧助行防跌科技應用手冊》（2026 年版）第三章，參考 CDC STEADI 跌倒預防計畫。</p>
+    </div>
+
+    <div class="card" id="parq">
+        <h2>🏃 8. PAR-Q 運動前篩檢（七題是非題）</h2>
+        <p class="card-desc">安排運動或使用坐姿訓練設備前，先完成以下七題篩檢。</p>
+        <div class="table-scroll">
+            <table>
+                <thead><tr><th>評量項目</th><th>是</th><th>否</th></tr></thead>
+                <tbody>
+                    <tr><td>醫師告知心臟問題，只能做醫師建議運動？</td><td><input type="radio" name="parq1" value="是"></td><td><input type="radio" name="parq1" value="否"></td></tr>
+                    <tr><td>活動時會有胸痛的感覺？</td><td><input type="radio" name="parq2" value="是"></td><td><input type="radio" name="parq2" value="否"></td></tr>
+                    <tr><td>過去 3 個月內，未活動時也有胸痛的情形？</td><td><input type="radio" name="parq3" value="是"></td><td><input type="radio" name="parq3" value="否"></td></tr>
+                    <tr><td>曾有暈眩導致失去平衡或意識的情況？</td><td><input type="radio" name="parq4" value="是"></td><td><input type="radio" name="parq4" value="否"></td></tr>
+                    <tr><td>是否有骨骼或關節問題，可能因活動惡化？</td><td><input type="radio" name="parq5" value="是"></td><td><input type="radio" name="parq5" value="否"></td></tr>
+                    <tr><td>因高血壓或心臟疾病而需要服藥治療（醫師處方）？</td><td><input type="radio" name="parq6" value="是"></td><td><input type="radio" name="parq6" value="否"></td></tr>
+                    <tr><td>有任何不適合活動的原因？</td><td><input type="radio" name="parq7" value="是"></td><td><input type="radio" name="parq7" value="否"></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn" type="button" onclick="computeParQ()">送出並查看結果</button>
+        <div class="output-box" id="parqResult"></div>
+        <p class="card-desc">任一題回答「是」，應先諮詢醫師後再安排運動。資料來源：附件「社區防跌運動計畫管理工具」內建之運動前評估表。</p>
+    </div>
+
+    <div class="card" id="frail">
+        <h2>🔍 9. FRAIL 量表（虛弱評估，第 1 步）</h2>
+        <p class="card-desc">用於初步評估是否處於虛弱狀態，請依個案實際狀況作答。</p>
+        <div class="table-scroll">
+            <table>
+                <thead><tr><th>問題</th><th>是</th><th>否</th></tr></thead>
+                <tbody>
+                    <tr><td>是否經常感到疲倦？</td><td><input type="radio" name="frail1" value="是"></td><td><input type="radio" name="frail1" value="否"></td></tr>
+                    <tr><td>是否無法不靠扶手走上 10 階樓梯？</td><td><input type="radio" name="frail2" value="是"></td><td><input type="radio" name="frail2" value="否"></td></tr>
+                    <tr><td>是否無法走完一個街區（約 400 公尺）？</td><td><input type="radio" name="frail3" value="是"></td><td><input type="radio" name="frail3" value="否"></td></tr>
+                    <tr><td>是否患有五種以上慢性疾病？</td><td><input type="radio" name="frail4" value="是"></td><td><input type="radio" name="frail4" value="否"></td></tr>
+                    <tr><td>近半年內是否體重減輕超過 5 公斤？</td><td><input type="radio" name="frail5" value="是"></td><td><input type="radio" name="frail5" value="否"></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn" type="button" onclick="computeFrail()">送出並查看結果</button>
+        <div class="output-box" id="frailResult"></div>
+        <p class="card-desc">〔資訊缺口〕原始工具為多步驟評估，畫面僅提供「第 1 步」，未提供完整分級標準，本頁僅呈現「是」的題數，不進行風險分級。資料來源：Morley JE et al., <em>J Nutr Health Aging.</em> 2012;16(7):601–608。</p>
+    </div>
+
+    <div class="card" id="home">
+        <h2>🏡 10. 居家環境安全防跌檢核表</h2>
+        <p class="card-desc">系統性檢視居家七大區域的防跌安全狀態，勾選已確認符合安全要求的項目。</p>
+        <div class="aid-group">
+            <span class="checkbox-inline"><input id="home0" type="checkbox"> 地板（走道淨空、地毯邊緣平整、電線收納整齊）</span>
+            <span class="checkbox-inline"><input id="home1" type="checkbox"> 燈光照明（樓梯照明充足、開關易於觸及）</span>
+            <span class="checkbox-inline"><input id="home2" type="checkbox"> 樓梯踏階（雙向開關、止滑膠條、堅固扶手）</span>
+            <span class="checkbox-inline"><input id="home3" type="checkbox"> 浴室與淋浴區（地板防滑、用品伸手可及、安全扶手）</span>
+            <span class="checkbox-inline"><input id="home4" type="checkbox"> 廚房（照明充足、水漬油漬立刻擦乾）</span>
+            <span class="checkbox-inline"><input id="home5" type="checkbox"> 客廳與臥房（床高合宜、動線暢通）</span>
+            <span class="checkbox-inline"><input id="home6" type="checkbox"> 服裝鞋具（鞋子包腳防滑、褲管不過長、襪底止滑）</span>
+        </div>
+        <button class="btn" type="button" onclick="computeHomeCheck()">送出並查看結果</button>
+        <div class="output-box" id="homeResult"></div>
+        <p class="card-desc">資料來源：衛生福利部國民健康署，2016．居家環境檢核表．健康九九網站教育專區。</p>
+    </div>
+
+    <div class="card" id="risk">
+        <h2>🩺 11. 跌倒高危險因子自評篩檢表</h2>
+        <p class="card-desc">供高齡長者、家屬或基層照顧者快速自我篩檢跌倒風險，不需專業器材或訓練。</p>
+        <div class="table-scroll">
+            <table>
+                <thead><tr><th>問題</th><th>是</th><th>否</th></tr></thead>
+                <tbody>
+                    <tr><td>簡易平衡：我是否無法在沒有扶手支撐的情況下，單腳穩定站立達 5 秒鐘？</td><td><input type="radio" name="risk1" value="是"></td><td><input type="radio" name="risk1" value="否"></td></tr>
+                    <tr><td>意識狀況與認知：我或家人最近是否常有意識混亂、急性躁動不安、重度健忘，或急性認知退化？</td><td><input type="radio" name="risk2" value="是"></td><td><input type="radio" name="risk2" value="否"></td></tr>
+                    <tr><td>視覺功能：視覺功能不佳且沒有合適配鏡矯正，已顯著干擾日常活動？</td><td><input type="radio" name="risk3" value="是"></td><td><input type="radio" name="risk3" value="否"></td></tr>
+                    <tr><td>如廁頻率與排泄：是否有頻尿、嚴重大小便失禁或常態腹瀉，且每天下床如廁次數 ≥10 次？</td><td><input type="radio" name="risk4" value="是"></td><td><input type="radio" name="risk4" value="否"></td></tr>
+                    <tr><td>多重用藥：目前每天服用四種以上處方藥物，且包含鎮靜安眠藥、利尿劑、降血壓藥、抗憂鬱劑或降血糖藥？</td><td><input type="radio" name="risk5" value="是"></td><td><input type="radio" name="risk5" value="否"></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn" type="button" onclick="computeRiskSelf()">送出並查看結果</button>
+        <div class="output-box" id="riskSelfResult"></div>
+        <p class="card-desc">高風險篩檢標準：五項中任一項為「是」，即代表屬於臨床之跌倒高危險群。資料來源：臺北榮總，2025；臺北榮總桃園分院，2024；高雄榮總家醫部，2020。</p>
+    </div>
+
+    <div class="card card-yellow">
+        <h2>📑 評估紀錄（共 <span id="recordCount">0</span> 筆）</h2>
+        <p class="card-desc">每次按下「送出並查看結果」，該筆結果會自動加入下表，可一次匯出成 CSV／Excel 檔案保存。</p>
+        <div class="table-scroll">
+            <table id="recordTable">
+                <thead><tr><th>時間</th><th>評估工具</th><th>輸入摘要</th><th>結果</th><th>移除</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <button class="btn btn-seal" onclick="exportRecords()">📥 匯出評估紀錄 CSV／Excel</button>
+        <button class="btn btn-ghost" onclick="clearAllRecords()">🗑️ 清除全部紀錄</button>
+    </div>
+</main>
+
+<footer>
+    <div class="wrap">
+        <div><a href="../index.html">← 返回手冊首頁</a>　|　<a href="library.html">返回工具庫</a>　|　<a href="../clinical/guide.html#sec6">臨床衛教資源：衛教檢核表與工具箱</a></div>
+        <div style="margin-top:6px;">本頁如有任何問題，請洽 <a href="mailto:flkuo@nhri.edu.tw">flkuo@nhri.edu.tw</a>　｜　© 2026</div>
+    </div>
+</footer>
+
+<script src="../assets/js/protect.js"></script>
+<script src="../assets/js/self-check.js"></script>
+
+</body>
+</html>
